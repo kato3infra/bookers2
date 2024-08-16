@@ -1,2 +1,14 @@
-<h1>Books#index</h1>
-<p>Find me in app/views/books/index.html.erb</p>
+<h1>Books</h1>
+<% @books.each do |book| %>
+  <div>
+    <p><%= image_tag book.user.get_profile_image(100,100) %></p>
+    <p>
+      <%= link_to book_path(book.id) do %>
+        title：<%= book.book_name %>
+      <% end %>
+    </p>
+    <p>Opinion：<%= book.caption %></p>
+  </div>
+<% end %>
+
+<%= render 'books/self', book: @book %>

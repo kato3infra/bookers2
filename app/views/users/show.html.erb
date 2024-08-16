@@ -1,0 +1,13 @@
+<h2>Books</h2>
+
+<ul>
+  <% current_user.books.each do |book| %> <!-- ログインしているユーザーの投稿した本を表示 -->
+    <li>
+      <%= image_tag book.get_image %> <!-- 本の画像を表示 -->
+      <p>本の名前: <%= book.book_name %></p> <!-- 本の名前を表示 -->
+      <p>説明: <%= book.caption %></p> <!-- 本の説明を表示 -->
+    </li>
+  <% end %>
+</ul>
+
+<%= render 'books/self', book: @book %>
