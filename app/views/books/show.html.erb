@@ -1,3 +1,4 @@
+
 <div class="container">
   <div class="row">
     <div class="col-md-3">
@@ -25,10 +26,14 @@
               <% end %>
             </td>
             <td><%= @book.caption %></td>
-            <td></td>
             <td>
               <% if @book.user == current_user %>
-                <%= link_to "Destroy", book_path(@book), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+                <a class="btn btn-sm btn-success edit_book_<%= @book.id %>" href="<%= edit_book_path(@book) %>">Edit</a>
+              <% end %>
+            </td>
+            <td>
+              <% if @book.user == current_user %>
+                <a data-confirm="本当に削除しますか？" class="btn btn-sm btn-danger destroy_book_<%= @book.id %>" rel="nofollow" data-method="delete" href="<%= book_path(@book) %>">Destroy</a>
               <% end %>
             </td>
           </tr>
