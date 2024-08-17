@@ -1,15 +1,34 @@
-<h2>Users</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'books/self', book: @book %>
+    </div>
 
-<ul>
-  <% @users.each do |user| %>
-    <li>
-      <%= image_tag user.get_profile_image(100, 100) %>
+    <div class="col-md-1">
+      <!-- ここが空白のスペースになります -->
+    </div>
 
-      <%= user.name %>
+    <div class="col-md-8">
+      <h1>users</h1>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>image</th>
+            <th>name</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody style="background-color: #ffffff;">
+          <% @users.each do |user| %>
+            <tr style="background-color: #ffffff;">
+              <td><%= image_tag user.get_profile_image(100, 100) %></td>
+              <td><%= user.name %></td>
+              <td><%= link_to 'Show', user_path(user) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
-      <%= link_to 'show', user_path(user), class: 'btn btn-primary' %>
-    </li>
-  <% end %>
-</ul>
-
-<%= render 'books/self', book: @book %>

@@ -1,4 +1,6 @@
-<h2>Users</h2>
+<%= render 'books/self', book: @book %>
+
+<h2>Users1</h2>
 
 <ul>
   <% @users.each do |user| %>
@@ -12,4 +14,3 @@
   <% end %>
 </ul>
 
-<%= render 'books/self', book: @book %>

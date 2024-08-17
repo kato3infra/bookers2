@@ -1,11 +1,39 @@
-<div>
-  <%= image_tag @book.get_image %>
-  <p>本の名前：<%= @book.book_name %></p>
-  <p>説明：<%= @book.caption %></p>
-  <p>投稿ユーザー画像：<%= image_tag @book.user.get_profile_image(100,100) %></p>
-  <p>ユーザーネーム：<%= @book.user.name %></p>
-  <p>投稿日：<%= @book.created_at.strftime('%Y/%m/%d') %></p>
-  <% if @book.user == current_user %>
-    <%= link_to "削除", book_path(@book), method: :delete %>
-  <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'books/self', book: @book %>
+    </div>
+
+    <div class="col-md-1">
+      <!-- ここが空白のスペースになります -->
+    </div>
+
+    <div class="col-md-8">
+      <h1>Book detail</h1>
+      <table class="table table-striped">
+        <tbody style="background-color: #ffffff;">
+          <tr style="background-color: #ffffff;">
+            <td>
+              <%= link_to user_path(@book.user) do %>
+                <%= image_tag @book.user.get_profile_image(100,100) %><br>
+                <%= @book.user.name %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to book_path(@book.id) do %>
+                <%= @book.book_name %>
+              <% end %>
+            </td>
+            <td><%= @book.caption %></td>
+            <td></td>
+            <td>
+              <% if @book.user == current_user %>
+                <%= link_to "Destroy", book_path(@book), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
