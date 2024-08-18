@@ -2,8 +2,9 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
+         :recoverable, :rememberable,
          authentication_keys: [:name]
+
 
   has_many :books, dependent: :destroy
 
@@ -18,5 +19,6 @@ class User < ApplicationRecord
   end
 
   validates :name, presence: true, uniqueness: true
-  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, presence: true, uniqueness: true
+
 end

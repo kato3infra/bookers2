@@ -102,18 +102,22 @@
         </div> <!-- ここで container の閉じタグを追加 -->
       </nav>
     </header>
-  <main class="mb-auto">
-    <%= yield %>
-  </main>
 
-  <footer>
-    <div class="container mt-5">
-      <div class="row">
-        <div class="mx-auto">
-          <p>CopyRight Infratop.inc</p>
+    <main class="mb-auto">
+      <% if flash[:notice] %>
+        <p id="notice"><%= flash[:notice] %></p>
+      <% end %>
+      <%= yield %>
+    </main>
+
+    <footer>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="mx-auto">
+            <p>CopyRight Infratop.inc</p>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
+    </footer>
   </body>
 </html>

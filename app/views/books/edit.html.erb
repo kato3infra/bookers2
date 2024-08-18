@@ -1,10 +1,14 @@
-<p id="notice"></p>
-
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0">
 
       <h1>Editing Book</h1>
+      
+      <% if flash[:alert] %>
+        <div class="alert alert-danger">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
 
       <%= form_with model: @book, url: book_path(@book), method: :patch, local: true, id: "update-book-form" do |f| %>
         <div class="form-group">
