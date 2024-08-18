@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+  before_action :ensure_correct_user, only: [:edit, :update]
 
   def new
     @book = Book.new
@@ -28,8 +28,13 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
-    @new_book = Book.new
-    @user = @book.user
+    if @book
+      @new_book = Book.new
+      @user = @book.user
+    else
+      flash[:alert] = "Book not found."
+      redirect_to books_path
+    end
   end
 
   def destroy
@@ -65,7 +70,8 @@ class BooksController < ApplicationController
 
   def ensure_correct_user
     @book = Book.find(params[:id])
-    unless @book.user == current_user
+    @user = @book.user
+    unless @user == current_user
       flash[:alert] = "You are not authorized to perform this action."
       redirect_to books_path
     end

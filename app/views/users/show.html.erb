@@ -3,15 +3,15 @@
     <div class="col-md-3">
       <%= render 'books/self', user: @user, book: @book %>
 
-      <!-- 他人のユーザー情報を表示するサイドバー -->
-      <% if current_user != @user %>
-        <div class="user-info">
-          <h2><%= @user.name %></h2>
-          <p><%= @user.introduction %></p>
-          <!-- 他のユーザの編集リンクを表示 -->
+      <!-- 自分または他人のユーザー情報を表示するサイドバー -->
+      <div class="user-info">
+        <h2><%= @user.name %></h2>
+        <p><%= @user.introduction %></p>
+        <!-- 自分または他人でも編集リンクを表示 -->
+        <% if user_signed_in? %>
           <%= link_to 'Edit Profile', edit_user_path(@user), class: 'btn btn-primary' %>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
 
     <div class="col-md-8 offset-md-1">

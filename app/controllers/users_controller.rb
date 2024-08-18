@@ -45,10 +45,14 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :profile_image, :introduction)
   end
+  
+  def book_params
+    params.require(:book).permit(:title, :image, :body)
+  end
 
   def is_matching_login_user
-    user = User.find(params[:id])
-    unless user.id == current_user.id
+    @user = User.find(params[:id])
+    unless @user == current_user
       flash[:alert] = "You are not authorized to access this page."
       redirect_to user_path(current_user)
     end
