@@ -1,11 +1,36 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <%= render 'books/self', book: @new_book %>
+      <%= render 'books/self', user: current_user, book: @new_book %>
     </div>
 
     <div class="col-md-8 offset-md-1">
       <h1>Books</h1>
+
+      <!-- フラッシュメッセージの表示 -->
+      <% if flash[:alert] %>
+        <div class="alert alert-danger">
+          <%= flash[:alert] %>
+        </div>
+      <% elsif flash[:notice] %>
+        <div class="alert alert-success">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+
+
+      <% if @new_book.errors.any? %>
+        <div class="alert alert-danger">
+          <h4>There were errors with your submission:</h4>
+          <ul>
+            <% @new_book.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+
       <table class="table table-striped">
         <thead>
           <tr>
@@ -18,8 +43,12 @@
           <% @books.each do |book| %>
             <tr>
               <td>
-                <%= link_to user_path(book.user) do %>
-                  <%= image_tag book.user.get_profile_image(100, 100), class: "img-fluid" %>
+                <% if book.user %>
+                  <%= link_to user_path(book.user) do %>
+                    <%= image_tag(book.user.get_profile_image(100, 100) || 'default_image.png', class: "img-fluid") %>
+                  <% end %>
+                <% else %>
+                  <%= image_tag('default_image.png', class: "img-fluid") %>
                 <% end %>
               </td>
               <td>

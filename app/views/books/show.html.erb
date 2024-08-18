@@ -1,37 +1,32 @@
-
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <%= render 'books/self', book: @new_book %>
+      <%= render 'books/self', user: @book.user, book: @new_book %>
     </div>
 
     <div class="col-md-8 offset-md-1">
-      <h1>Book detai</h1>
+      <h1>Book detail</h1>
       <table class="table table-striped">
-        <tbody style="background-color: #ffffff;">
-          <tr style="background-color: #ffffff;">
+        <tbody>
+          <tr>
             <td>
               <%= link_to user_path(@book.user) do %>
-                <%= image_tag @book.user.get_profile_image(100,100) %><br>
+                <%= image_tag @book.user.get_profile_image(100, 100) %><br>
                 <%= @book.user.name %>
               <% end %>
             </td>
             <td>
-              <%= link_to book_path(@book.id) do %>
-                <%= @book.title %>
-              <% end %>
+              <strong>Title:</strong> <%= @book.title %><br>
+              <strong>Opinion:</strong> <%= @book.body %>
             </td>
-            <td><%= @book.body %></td>
-            <td>
-              <% if @book.user == current_user %>
-                <a class="btn btn-sm btn-success edit_book_<%= @book.id %>" href="<%= edit_book_path(@book) %>">Edit</a>
-              <% end %>
-            </td>
-            <td>
-              <% if @book.user == current_user %>
-                <a data-confirm="本当に削除しますか？" class="btn btn-sm btn-danger destroy_book_<%= @book.id %>" rel="nofollow" data-method="delete" href="<%= book_path(@book) %>">Destroy</a>
-              <% end %>
-            </td>
+            <% if @book.user == current_user %>
+              <td>
+                <%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %>
+              </td>
+              <td>
+                <%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}" %>
+              </td>
+            <% end %>
           </tr>
         </tbody>
       </table>

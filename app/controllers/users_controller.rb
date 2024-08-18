@@ -11,14 +11,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @books = @user.books
     @book = Book.new
   end
 
   def edit
     @user = User.find(params[:id])
     @book = Book.new
-    @users = User.all
   end
 
   def update
@@ -37,6 +35,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to root_path, notice: "User was successfully created."
     else
+      flash.now[:alert] = "Error: Failed to create user."
       render :new
     end
   end
@@ -50,7 +49,8 @@ class UsersController < ApplicationController
   def is_matching_login_user
     user = User.find(params[:id])
     unless user.id == current_user.id
-      redirect_to post_images_path
+      flash[:alert] = "You are not authorized to access this page."
+      redirect_to user_path(current_user)
     end
   end
 end

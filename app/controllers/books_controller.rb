@@ -13,8 +13,10 @@ class BooksController < ApplicationController
       flash[:notice] = "You have created book successfully."
       redirect_to book_path(@book)
     else
-      flash.now[:alert] = "Error: Failed to create a new book."
-      render :new
+      @new_book = @book
+      @books = Book.all 
+      flash.now[:alert] = @book.errors.full_messages.join(", ")
+      render :index
     end
   end
 

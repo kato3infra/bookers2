@@ -1,16 +1,27 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0">
+    <div class="col-md-8 offset-md-2">
 
       <h1>Editing Book</h1>
-      
+
       <% if flash[:alert] %>
         <div class="alert alert-danger">
           <%= flash[:alert] %>
         </div>
       <% end %>
 
-      <%= form_with model: @book, url: book_path(@book), method: :patch, local: true, id: "update-book-form" do |f| %>
+      <% if @book.errors.any? %>
+        <div class="alert alert-danger">
+          <h4>There were errors with your submission:</h4>
+          <ul>
+            <% @book.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%= form_with model: @book, local: true do |f| %>
         <div class="form-group">
           <%= f.label :title, "Title" %>
           <%= f.text_field :title, class: "form-control" %>
