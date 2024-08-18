@@ -5,12 +5,8 @@
       <%= render 'books/self', book: @new_book %>
     </div>
 
-    <div class="col-md-1">
-      <!-- ここが空白のスペースになります -->
-    </div>
-
-    <div class="col-md-8">
-      <h1>Book detail</h1>
+    <div class="col-md-8 offset-md-1">
+      <h1>Book detai</h1>
       <table class="table table-striped">
         <tbody style="background-color: #ffffff;">
           <tr style="background-color: #ffffff;">
@@ -22,10 +18,10 @@
             </td>
             <td>
               <%= link_to book_path(@book.id) do %>
-                <%= @book.book_name %>
+                <%= @book.title %>
               <% end %>
             </td>
-            <td><%= @book.caption %></td>
+            <td><%= @book.body %></td>
             <td>
               <% if @book.user == current_user %>
                 <a class="btn btn-sm btn-success edit_book_<%= @book.id %>" href="<%= edit_book_path(@book) %>">Edit</a>

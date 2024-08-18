@@ -1,9 +1,11 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+
   def new
     @book = Book.new
   end
 
-  # 投稿データの保存
   def create
     @book = Book.new(book_params)
     @book.user_id = current_user.id
@@ -11,26 +13,30 @@ class BooksController < ApplicationController
       flash[:notice] = "You have created book successfully."
       redirect_to book_path(@book)
     else
-      flash.now[:alert] = "error Failed to create a new book."
-      @books = current_user.books
-      redirect_back(fallback_location: root_path)
+      flash.now[:alert] = "Error: Failed to create a new book."
+      render :new
     end
   end
 
   def index
     @books = Book.all
     @new_book = Book.new
+    @user = current_user
   end
 
   def show
     @book = Book.find(params[:id])
-    @books = current_user.books
     @new_book = Book.new
+    @user = @book.user
   end
 
   def destroy
-    book  = Book.find(params[:id])
-    book.destroy
+    @book = Book.find(params[:id])
+    if @book.destroy
+      flash[:notice] = "Book was successfully deleted."
+    else
+      flash[:alert] = "Error: Failed to delete the book."
+    end
     redirect_to books_path
   end
 
@@ -44,15 +50,22 @@ class BooksController < ApplicationController
       flash[:notice] = "You have updated book successfully."
       redirect_to book_path(@book)
     else
-      flash.now[:alert] = "error Failed to update post."
+      flash.now[:alert] = "Error: Failed to update the book."
       render :edit
     end
   end
 
-    # 投稿データのストロングパラメータ
   private
 
   def book_params
-    params.require(:book).permit(:book_name, :image, :caption)
+    params.require(:book).permit(:title, :image, :body)
+  end
+
+  def ensure_correct_user
+    @book = Book.find(params[:id])
+    unless @book.user == current_user
+      flash[:alert] = "You are not authorized to perform this action."
+      redirect_to books_path
+    end
   end
 end

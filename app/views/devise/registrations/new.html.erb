@@ -9,6 +9,17 @@
       <%= form_with model: @user, url: user_registration_path do |f| %>
 
         <%= render "devise/shared/error_messages", resource: resource %>
+        
+        <% if resource.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(resource.errors.count, "error") %> prohibited this user from being saved:</h2>
+            <ul>
+              <% resource.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
 
         <div class="field">
           <%= f.label :name %><br>
@@ -36,7 +47,7 @@
         <div class="actions">
           <input type="submit" name="commit" value="Sign up" class="btn btn-sm btn-success" data-disable-with="Sign up">
         </div>
-        
+
         <%= render "devise/shared/links" %>
 
       <% end %>
