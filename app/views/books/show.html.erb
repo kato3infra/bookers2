@@ -7,8 +7,8 @@
     <div class="col-md-8 offset-md-1">
       <h1>Book detail</h1>
       <table class="table table-striped">
-        <tbody>
-          <tr>
+        <tbody style="background-color: #ffffff;">
+          <tr style="background-color: #ffffff;">
             <td>
               <%= link_to user_path(@book.user) do %>
                 <%= image_tag @book.user.get_profile_image(100, 100) %><br>
@@ -16,8 +16,10 @@
               <% end %>
             </td>
             <td>
-              <strong>Title:</strong> <%= @book.title %><br>
-              <strong>Opinion:</strong> <%= @book.body %>
+              <%= @book.title %>
+            </td>
+            <td>
+              <%= @book.body %>
             </td>
             <% if @book.user == current_user %>
               <td>
