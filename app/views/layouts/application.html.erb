@@ -20,52 +20,52 @@
             <span>Bookers</span>
           </a>
           <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                  aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
                 <li class="nav-item">
-                  <a class="nav-link text-light d-flex align-items-center" href="<%= user_path(current_user) %>">
+                  <%= link_to user_path(current_user), class: 'nav-link text-light d-flex align-items-center' do %>
                     <i class="fa-solid fa-house"></i> Home
-                  </a>
+                  <% end %>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-light d-flex align-items-center" href="<%= users_path %>">
+                  <%= link_to users_path, class: 'nav-link text-light d-flex align-items-center' do %>
                     <i class="fa-solid fa-users"></i> Users
-                  </a>
+                  <% end %>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-light d-flex align-items-center" href="<%= books_path %>">
+                  <%= link_to books_path, class: 'nav-link text-light d-flex align-items-center' do %>
                     <i class="fa-solid fa-book-open"></i> Books
-                  </a>
+                  <% end %>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-light d-flex align-items-center" href="<%= destroy_user_session_path %>" data-method="delete">
+                  <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-light d-flex align-items-center' do %>
                     <i class="fa-solid fa-right-from-bracket"></i> Log out
-                  </a>
+                  <% end %>
                 </li>
               <% else %>
                 <li class="nav-item">
-                  <a class="nav-link text-light d-flex align-items-center" href="<%= root_path %>">
+                  <%= link_to root_path, class: 'nav-link text-light d-flex align-items-center' do %>
                     <i class="fa-solid fa-house"></i> Home
-                  </a>
+                  <% end %>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-light d-flex align-items-center" href="<%= about_path %>">
+                  <%= link_to about_path, class: 'nav-link text-light d-flex align-items-center' do %>
                     <i class="fa-solid fa-link"></i> About
-                  </a>
+                  <% end %>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-light d-flex align-items-center" href="<%= new_user_registration_path %>">
+                  <%= link_to new_user_registration_path, class: 'nav-link text-light d-flex align-items-center' do %>
                     <i class="fa-solid fa-user-plus"></i> Sign up
-                  </a>
+                  <% end %>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-light d-flex align-items-center" href="<%= new_user_session_path %>">
+                  <%= link_to new_user_session_path, class: 'nav-link text-light d-flex align-items-center' do %>
                     <i class="fa-solid fa-right-to-bracket"></i> Log in
-                  </a>
+                  <% end %>
                 </li>
               <% end %>
             </ul>
@@ -76,11 +76,11 @@
 
     <main class="mb-auto">
       <% if flash[:notice] %>
-        <div class="alert alert-success">
+        <div>
           <p id="notice"><%= flash[:notice] %></p>
         </div>
       <% elsif flash[:alert] %>
-        <div class="alert alert-danger">
+        <div>
           <p id="alert"><%= flash[:alert] %></p>
         </div>
       <% end %>

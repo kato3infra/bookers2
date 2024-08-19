@@ -4,9 +4,9 @@
     <h2>Users info</h2>
     
     <% if flash[:alert] %>
-      <div class="alert alert-danger">
+      <p>
         <%= flash[:alert] %>
-      </div>
+      </p>
     <% end %>
 
     <%= form_with model: @user, local: true do |f| %>

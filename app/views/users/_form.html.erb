@@ -16,9 +16,9 @@
 
 
   <div class="row">
-    <a class="btn btn-outline-secondary btn-block edit_user_<%= user.id %> mt-3" href="<%= edit_user_path(user) %>">
+    <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block edit_user_#{user.id} mt-3" do %>
       <i class="fa-solid fa-user-gear"></i>
-    </a>
+    <% end %>
   </div>
 
 

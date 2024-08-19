@@ -9,18 +9,18 @@
 
       <!-- フラッシュメッセージの表示 -->
       <% if flash[:alert] %>
-        <div class="alert alert-danger">
+        <p>
           <%= flash[:alert] %>
-        </div>
+        </p>
       <% elsif flash[:notice] %>
-        <div class="alert alert-success">
+        <p>
           <%= flash[:notice] %>
-        </div>
+        </p>
       <% end %>
 
 
       <% if @new_book.errors.any? %>
-        <div class="alert alert-danger">
+        <div>
           <h4>There were errors with your submission:</h4>
           <ul>
             <% @new_book.errors.full_messages.each do |message| %>

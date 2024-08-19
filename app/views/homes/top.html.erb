@@ -16,10 +16,10 @@
 
     <div class="btn-wraper col-10 mx-auto">
       <div class="row">
-        <a class="btn btn-info btn-sm btn-block mb-2 sign-in" href="<%= new_user_session_path %>">Log in</a>
+        <%= link_to 'Log in', new_user_session_path, class: 'btn btn-info btn-sm btn-block mb-2 sign-in' %>
       </div>
       <div class="row">
-        <a class="btn btn-success btn-sm btn-block sign-up" href="<%= new_user_registration_path %>">Sign up</a>
+        <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-success btn-sm btn-block sign-up' %>
       </div>
     </div>
   </div>
