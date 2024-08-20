@@ -35,6 +35,7 @@ class BooksController < ApplicationController
       flash[:alert] = "Book not found."
       redirect_to books_path
     end
+    @book_comment = BookComment.new
   end
 
   def destroy
