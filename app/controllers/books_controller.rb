@@ -28,6 +28,7 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+    @book_comment = BookComment.new
     if @book
       @new_book = Book.new
       @user = @book.user
@@ -35,7 +36,6 @@ class BooksController < ApplicationController
       flash[:alert] = "Book not found."
       redirect_to books_path
     end
-    @book_comment = BookComment.new
   end
 
   def destroy
