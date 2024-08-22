@@ -5,7 +5,7 @@ class BookCommentsController < ApplicationController
     book = Book.find(params[:book_id])
     comment = current_user.book_comments.new(book_comment_params)
     comment.book_id = book.id
-        if comment.save
+    if comment.save
       flash[:notice] = "Successfully commented."
       redirect_to book_path(book)
     else
@@ -15,15 +15,9 @@ class BookCommentsController < ApplicationController
   end
   
   def destroy
-    @book_comment = BookComment.find(params[:id])
-    @book = @book_comment.book
-    if @book_comment.destroy
-      flash[:notice] = "Comment successfully deleted!"
-      redirect_to book_path(@book)
-    else
-      flash[:alert] = "Failed to delete comment."
-      redirect_to book_path(@book)
-    end
+    BookComment.find(params[:id]).destroy
+    flash[:notice] = "Comment successfully deleted!"
+    redirect_to book_path(params[:book_id])
   end
 
   private
